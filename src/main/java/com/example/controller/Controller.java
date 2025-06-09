@@ -49,10 +49,8 @@ public class Controller {
         }
         Language sourceLanguage = Language.getLanguageFromString(sourceLang);
         Language targetLanguage = Language.getLanguageFromString(targetLang);
-        TranslatorType type = Utils.getTranslatorTypeFromLanguages(sourceLanguage, targetLanguage);
 
-        sentence = type.name() + "__" + sentence;
-        translatorAdapter.addTranslation(sentence, translation);
+        translatorAdapter.addTranslation(sourceLanguage, targetLanguage, sentence, translation);
         return Response.ok("translation added to database").build();
     }
 
@@ -66,10 +64,8 @@ public class Controller {
         }
         Language sourceLanguage = Language.getLanguageFromString(sourceLang);
         Language targetLanguage = Language.getLanguageFromString(targetLang);
-        TranslatorType type = Utils.getTranslatorTypeFromLanguages(sourceLanguage, targetLanguage);
 
-        sentence = type.name() + "__" + sentence;
-        translatorAdapter.removeLastTranslation(sentence);
+        translatorAdapter.removeLastTranslation(sourceLanguage, targetLanguage, sentence);
         return Response.ok("last translation removed from db").build();
     }
 }
