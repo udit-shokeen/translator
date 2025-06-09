@@ -104,20 +104,13 @@ public class TranslatorAdapter {
         else {
             //  remove source -> eng mapping
             TranslatorRequest request = TranslatorRequest.builder()
-                    .text(types.get(0).name() + "__" + sourceText)
+                    .text(sourceText)
                     .sourceLang(sourceLanguage)
                     .targetLang(Language.ENG)
                     .build();
             TranslatorResponse intermediateResponse = translators.get(0).translate(request, database, model);
-            database.removeLastTranslation(types.get(0).name() + "__" + intermediateResponse.getTranslatedText());
-            //  remove eng -> target mapping
-            TranslatorRequest intermediateRequest = TranslatorRequest.builder()
-                    .text(intermediateResponse.getTranslatedText())
-                    .sourceLang(Language.ENG)
-                    .targetLang(targetLanguage)
-                    .build();
-            TranslatorResponse finalResponse = translators.get(1).translate(intermediateRequest, database, model);
-            database.removeLastTranslation(types.get(1).name() + "__" + finalResponse.getTranslatedText());
+            database.removeLastTranslation(types.get(0).name() + "__" + sourceText);
+            database.removeLastTranslation(types.get(1).name() + "__" + intermediateResponse.getTranslatedText());
         }
     }
 }
