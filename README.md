@@ -68,3 +68,4 @@ curl --location --request DELETE 'http://localhost:8080/deleteLastTranslation?so
 ---
 
 ## FLOW-CHART
+![image](https://github.com/user-attachments/assets/05b5eeee-9476-4814-ae6b-86df81b77700)
